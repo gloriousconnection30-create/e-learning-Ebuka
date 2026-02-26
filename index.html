@@ -1,0 +1,1339 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentor · professional e‑learning</title>
+    <!-- Bootstrap 5 + icons + AOS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <!-- Font Awesome 6 (free) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        :root {
+            --primary: #2D6A4F;
+            /* deep green */
+            --primary-light: #40916C;
+            --primary-very-light: #D8F3DC;
+            --secondary: #1E3C5C;
+            --accent: #136F63;
+            --neutral-light: #F8F9FA;
+            --neutral-dark: #212529;
+            --gray-mid: #6C757D;
+            --white: #ffffff;
+            --shadow-sm: 0 8px 25px -8px rgba(0, 50, 30, 0.12);
+            --shadow-hover: 0 20px 35px -10px rgba(0, 70, 40, 0.2);
+            --border-radius-lg: 2rem;
+            --border-radius-md: 1.5rem;
+            --transition: all 0.25s ease;
+        }
+
+        body {
+            background-color: var(--white);
+            color: var(--neutral-dark);
+            opacity: 1;
+        }
+
+        /* ----- PRELOADER (glassmorphism + mentor) ----- */
+        #preloader {
+            position: fixed;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.4s ease, visibility 0.4s;
+        }
+
+        #preloader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .preloader-content {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 3rem 4rem;
+            border-radius: 60px;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 20px 40px rgba(0, 40, 20, 0.15);
+        }
+
+        .preloader-content h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .preloader-spinner {
+            width: 60px;
+            height: 60px;
+            margin: 1.5rem auto 0;
+            border: 5px solid rgba(45, 106, 79, 0.2);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s infinite ease-in-out;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* ----- fixed navbar (unchanged) ----- */
+        .custom-navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            background: var(--white);
+            box-shadow: 0 4px 20px rgba(0, 40, 30, 0.08);
+            padding: 0 5%;
+            z-index: 1050;
+            transition: var(--transition);
+        }
+
+        .custom-navbar h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: -0.5px;
+            margin: 0;
+            cursor: default;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-menu li {
+            margin: 0 0.2rem;
+        }
+
+        .nav-menu li a {
+            text-decoration: none;
+            color: var(--neutral-dark);
+            font-weight: 500;
+            font-size: 1.1rem;
+            padding: 0.5rem 0.9rem;
+            border-radius: 40px;
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+
+        .nav-menu li a:hover {
+            background-color: var(--primary-very-light);
+            color: var(--primary);
+        }
+
+        .nav-menu li a.active {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .nav-btn {
+            background-color: var(--primary);
+            color: white !important;
+            padding: 0.6rem 1.8rem !important;
+            border-radius: 40px !important;
+            margin-left: 1rem;
+            font-weight: 600;
+        }
+
+        .nav-btn:hover {
+            background-color: var(--primary-light);
+            color: white !important;
+        }
+
+        .hamburger {
+            display: none;
+            font-size: 2rem;
+            background: none;
+            border: none;
+            color: var(--primary);
+            cursor: pointer;
+            z-index: 1100;
+        }
+
+        @media (max-width: 991px) {
+            .hamburger {
+                display: block;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 300px;
+                height: 100vh;
+                background: var(--white);
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+                padding: 100px 30px 30px;
+                box-shadow: -5px 0 30px rgba(0, 0, 0, 0.1);
+                transition: 0.3s ease-in-out;
+                gap: 1.5rem;
+                z-index: 1040;
+            }
+
+            .nav-menu.active {
+                right: 0;
+            }
+
+            .nav-menu li {
+                width: 100%;
+            }
+
+            .nav-menu li a {
+                display: block;
+                width: 100%;
+                padding: 0.8rem 1rem;
+                font-size: 1.2rem;
+            }
+
+            .nav-btn {
+                margin-left: 0;
+                text-align: center;
+                width: 100%;
+            }
+        }
+
+        /* ----- carousel (unchanged) ----- */
+        .first-div,
+        .second-div,
+        .third-div {
+            height: 90vh;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .first-div {
+            background-image: linear-gradient(rgba(0, 40, 30, 0.75), rgba(0, 40, 30, 0.75)), url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1400&auto=format');
+        }
+
+        .second-div {
+            background-image: linear-gradient(rgba(30, 60, 92, 0.8), rgba(30, 60, 92, 0.8)), url('https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=1400&auto=format');
+        }
+
+        .third-div {
+            background-image: linear-gradient(rgba(18, 52, 44, 0.8), rgba(18, 52, 44, 0.8)), url('https://images.unsplash.com/photo-1557804506-669a67965ba0?w=1400&auto=format');
+        }
+
+        .first-div h1,
+        .second-div h1,
+        .third-div h1 {
+            color: white;
+            font-size: clamp(2rem, 8vw, 4rem);
+            padding-left: 8%;
+        }
+
+        .first-div p,
+        .second-div p,
+        .third-div p {
+            color: rgba(255, 255, 255, 0.9);
+            padding-left: 8%;
+            font-size: 1.3rem;
+        }
+
+        .first-btn {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+            padding: 0.9rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            margin-left: 8%;
+            width: fit-content;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .first-btn:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+
+        /* ----- sections (unchanged) ----- */
+        section {
+            padding: 5rem 5%;
+        }
+
+        .first-section {
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+            background: var(--white);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .air {
+            flex: 1 1 50%;
+        }
+
+        .air h1 {
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .air .intro {
+            font-size: 1.1rem;
+            color: #2d3a3a;
+            margin-bottom: 2rem;
+            border-left: 4px solid var(--primary-light);
+            background: linear-gradient(to right, var(--primary-very-light), transparent);
+            border-radius: 0 60px 60px 0;
+            padding: 1.2rem 1.8rem;
+        }
+
+        .air ul {
+            list-style: none;
+            margin-bottom: 2.5rem;
+        }
+
+        .air ul li {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-size: 1.05rem;
+            color: #1e2b2b;
+        }
+
+        .air ul li::before {
+            content: "✓";
+            background: var(--primary);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            font-weight: bold;
+            flex-shrink: 0;
+            box-shadow: 0 4px 8px rgba(45, 106, 79, 0.25);
+        }
+
+        .air-btn {
+            background: var(--primary);
+            color: white;
+            padding: 0.9rem 2.8rem;
+            border-radius: 60px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            display: inline-block;
+            border: 2px solid transparent;
+            transition: 0.25s ease;
+            box-shadow: 0 8px 18px -6px rgba(45, 106, 79, 0.4);
+        }
+
+        .air-btn:hover {
+            background: var(--primary-light);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 25px -8px #1d5b43;
+        }
+
+        .air-image {
+            flex: 1 1 45%;
+        }
+
+        .air-image img {
+            width: 100%;
+            height: auto;
+            max-height: 480px;
+            object-fit: cover;
+            border-radius: 2rem;
+            box-shadow: 0 20px 35px -6px rgba(0, 50, 30, 0.25);
+            transition: transform 0.4s ease;
+            border: 4px solid white;
+            outline: 1px solid rgba(45, 106, 79, 0.2);
+        }
+
+        .air-image img:hover {
+            transform: scale(1.02) rotate(0.5deg);
+        }
+
+        @media (max-width: 900px) {
+            .first-section {
+                flex-direction: column-reverse;
+                gap: 2.5rem;
+                padding: 2.5rem 1.5rem;
+            }
+
+            .air h1 {
+                text-align: center;
+            }
+
+            .air .intro {
+                text-align: left;
+            }
+        }
+
+        .second-section {
+            background: var(--neutral-light);
+        }
+
+        .stats {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 2rem;
+        }
+
+        .stats-item {
+            text-align: center;
+        }
+
+        .stats-item h2 {
+            color: var(--primary);
+            font-size: 3rem;
+            font-weight: 700;
+        }
+
+        .third-section .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 2rem;
+        }
+
+        .main-card {
+            background: var(--secondary);
+            color: white;
+            padding: 2rem;
+            border-radius: 24px;
+        }
+
+        .main-card .btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border-radius: 50px;
+            padding: 0.7rem 2rem;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 1rem;
+        }
+
+        .main-card .btn:hover {
+            background: rgba(255, 255, 255, 0.35);
+        }
+
+        .card {
+            background: white;
+            padding: 2rem 1.5rem;
+            border-radius: 24px;
+            box-shadow: var(--shadow-sm);
+            text-align: center;
+            border: none;
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .icon {
+            background: var(--primary-very-light);
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .icon i {
+            font-size: 2rem;
+            color: var(--primary);
+        }
+
+        .card:hover .icon {
+            background: var(--primary);
+        }
+
+        .card:hover .icon i {
+            color: white;
+        }
+
+        .fourth-section .box-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.2rem;
+        }
+
+        .box {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.2rem 1.5rem;
+            background: var(--neutral-light);
+            border-radius: 60px;
+            border: 1px solid #dee2e6;
+            transition: var(--transition);
+        }
+
+        .box i {
+            font-size: 1.8rem;
+            color: var(--primary);
+        }
+
+        .box:hover {
+            border-color: var(--primary);
+            background: white;
+            transform: translateY(-3px);
+        }
+
+        .courses-section {
+            background: var(--white);
+            text-align: center;
+        }
+
+        .courses-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .course-card {
+            background: white;
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: 0.2s;
+            text-align: left;
+        }
+
+        .course-card:hover {
+            transform: scale(1.01);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .course-img {
+            position: relative;
+        }
+
+        .badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            border-radius: 50px;
+            font-weight: 500;
+            padding: 0.3rem 1.2rem;
+        }
+
+        .price {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--neutral-dark);
+            color: white;
+            padding: 0.3rem 1.2rem;
+            border-radius: 50px;
+            font-weight: 600;
+        }
+
+        .course-content {
+            padding: 1.5rem;
+        }
+
+        .meta {
+            display: flex;
+            gap: 1.5rem;
+            font-size: 0.9rem;
+            color: var(--gray-mid);
+            margin-bottom: 0.5rem;
+        }
+
+        .instructor {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .instructor img {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .enroll-btn {
+            background: var(--primary);
+            border: none;
+            width: 100%;
+            padding: 0.8rem;
+            border-radius: 40px;
+            font-weight: 600;
+            color: white;
+            margin-top: 1rem;
+            transition: var(--transition);
+        }
+
+        .enroll-btn:hover {
+            background: var(--primary-light);
+        }
+
+        .Viewmore-courses {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            background: white;
+            border-radius: 60px;
+            padding: 0.8rem 3rem;
+            font-weight: 600;
+            margin-top: 3rem;
+            transition: var(--transition);
+        }
+
+        .Viewmore-courses:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .trainers-section {
+            background: var(--neutral-light);
+        }
+
+        .trainers-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .instructor-card {
+            background: white;
+            border-radius: 30px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .instructor-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .instructor-card img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+        }
+
+        .card-stats {
+            display: flex;
+            justify-content: space-around;
+            background: var(--neutral-light);
+            border-radius: 60px;
+            padding: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .stat h4 {
+            color: var(--primary);
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .stat span {
+            font-size: 0.85rem;
+            color: var(--gray-mid);
+        }
+
+        .instructor-socials {
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+            margin: 1.2rem 0;
+        }
+
+        .instructor-socials a {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .instructor-socials a:hover {
+            background: var(--primary-light);
+            transform: scale(1.1);
+        }
+
+        .profile-btn {
+            background: var(--primary);
+            color: white;
+            padding: 0.7rem 2rem;
+            border-radius: 60px;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 500;
+        }
+
+        .profile-btn:hover {
+            background: var(--primary-light);
+        }
+
+        /* ----- FOOTER with GLASSMORPHISM (subscribe button fixed) ----- */
+        .footer-section {
+            background: transparent;
+            position: relative;
+            padding: 5rem 5% 2rem;
+            margin-top: 2rem;
+        }
+
+        .footer-section::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(28, 43, 45, 0.85);
+            /* slightly darker for better contrast */
+            backdrop-filter: blur(12px) saturate(180%);
+            -webkit-backdrop-filter: blur(12px) saturate(180%);
+            z-index: -1;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2.5rem;
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        .footer-col h3 {
+            color: white;
+            margin-bottom: 1.2rem;
+            font-weight: 600;
+        }
+
+        .footer-col p,
+        .footer-col li,
+        .footer-col b {
+            color: rgba(230, 250, 240, 0.95);
+            list-style: none;
+            text-decoration: none;
+            font-weight: normal;
+        }
+
+        .footer-col ul {
+            padding: 0;
+        }
+
+        .footer-col li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-col a {
+            color: rgba(230, 250, 240, 0.95);
+            text-decoration: none;
+        }
+
+        .footer-col a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+
+        .footer-socials a {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            color: white;
+            width: 40px;
+            height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-right: 0.5rem;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .footer-socials a:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        /* NEWSLETTER FORM – BUTTON NOW HIGHLY VISIBLE */
+        .newsletter-form {
+            display: flex;
+            border-radius: 60px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(8px);
+            margin-top: 1rem;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            border: none;
+            padding: 0.8rem 1.2rem;
+            outline: none;
+            background: rgba(255, 255, 255, 0.9);
+            /* light background for readability */
+            color: #1e2b2b;
+            font-weight: 500;
+        }
+
+        .newsletter-form input::placeholder {
+            color: #3a5a55;
+            font-weight: 400;
+        }
+
+        .newsletter-form button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            font-weight: 700;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: var(--transition);
+            border-left: 2px solid rgba(255, 255, 255, 0.3);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .newsletter-form button:hover {
+            background: var(--primary-light);
+            transform: scale(1.02);
+        }
+
+        /* ----- PROGRESS RING SCROLL TO TOP (metered style) ----- */
+        .progress-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(6px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.2s;
+            border: none;
+        }
+
+        .progress-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .progress-ring {
+            position: relative;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: conic-gradient(var(--primary) 0deg, #e0e0e0 0deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.1s;
+        }
+
+        .progress-ring-inner {
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--primary);
+            box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .progress-ring-inner i {
+            font-size: 1.4rem;
+            color: var(--primary);
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- PRELOADER -->
+    <div id="preloader">
+        <div class="preloader-content">
+            <h1>MENTOR</h1>
+            <div class="preloader-spinner"></div>
+            <p style="color: var(--secondary); font-weight: 500; margin-top: 1rem;">where knowledge grows</p>
+        </div>
+    </div>
+
+    <!-- navbar -->
+    <div class="custom-navbar">
+        <h1>MENTOR</h1>
+        <button class="hamburger" id="hamburger-btn" aria-label="toggle menu"><i class="fas fa-bars"></i></button>
+        <ul class="nav-menu" id="nav-menu">
+            <li><a href="#" class="active">Home</a></li>
+            <li><a href="/about us.html">About</a></li>
+            <li><a href="/courses.html">Courses</a></li>
+            <li><a href="">Trainers</a></li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Pricing</a></li>
+            <li><a href="/contact.html">Contact</a></li>
+            <li><a href="/getstarted.html" class="nav-btn">Get Started</a></li>
+        </ul>
+    </div>
+
+    <!-- carousel -->
+    <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="first-div">
+                    <h1 data-aos="fade-up">learning today,<br> leading tomorrow.</h1>
+                    <p data-aos="fade-right">Empowering Minds Through Digital Learning.</p>
+                    <a href="#" class="first-btn">Get started</a>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="second-div">
+                    <h1>Unlock Your Potential — Learn Anytime, anywhere!</h1>
+                    <p>Empower Your Future With Expert-led courses.</p>
+                    <a href="#" class="first-btn">Get started</a>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="third-div">
+                    <h1>Your Learning Journey Starts Here!</h1>
+                    <p>Access quality education from top instructors.</p>
+                    <a href="#" class="first-btn">Get started</a>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
+            data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying"
+            data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+    <!-- first section -->
+    <section class="first-section">
+        <div class="air" data-aos="fade-right">
+            <h1>Empowering Learners with Practical Digital Skills</h1>
+            <p class="intro">We provide flexible, high‑quality online courses designed to help students, professionals,
+                and lifelong learners build real‑world skills at their own pace.</p>
+            <ul>
+                <li>Learn from industry‑experienced instructors using up‑to‑date course materials.</li>
+                <li>Access courses anytime, anywhere, on any device.</li>
+                <li>Gain practical knowledge through projects, quizzes, and hands‑on exercises.</li>
+            </ul>
+            <a href="#" class="air-btn">Explore more courses →</a>
+        </div>
+        <div class="air-image" data-aos="fade-left">
+            <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=800&auto=format"
+                alt="Students collaborating online">
+        </div>
+    </section>
+
+    <!-- stats -->
+    <section class="second-section">
+        <div class="stats">
+            <div class="stats-item" data-aos="fade-up">
+                <h2>1232</h2>
+                <p>Students</p>
+            </div>
+            <div class="stats-item" data-aos="fade-up" data-aos-delay="100">
+                <h2>64</h2>
+                <p>Courses</p>
+            </div>
+            <div class="stats-item" data-aos="fade-up" data-aos-delay="200">
+                <h2>42</h2>
+                <p>Events</p>
+            </div>
+            <div class="stats-item" data-aos="fade-up" data-aos-delay="300">
+                <h2>24</h2>
+                <p>Trainers</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- why choose us -->
+    <section class="third-section">
+        <div class="cards">
+            <div class="main-card" data-aos="fade-up" data-aos-delay="100">
+                <h1>Why Choose Our Learning Platform?</h1>
+                <p>We provide flexible, industry-relevant courses designed to help learners build practical skills and
+                    advance their careers.</p>
+                <a href="#" class="btn">Learn More →</a>
+            </div>
+            <div class="card" data-aos="fade-up" data-aos-delay="200">
+                <div class="icon"><i class="bi bi-person-check"></i></div>
+                <h3>Expert-Led Courses</h3>
+                <p>Learn from experienced instructors with real-world expertise.</p>
+            </div>
+            <div class="card" data-aos="fade-up" data-aos-delay="300">
+                <div class="icon"><i class="bi bi-clock-history"></i></div>
+                <h3>Flexible Learning</h3>
+                <p>Study anytime, anywhere, at your own pace.</p>
+            </div>
+            <div class="card" data-aos="fade-up" data-aos-delay="400">
+                <div class="icon"><i class="bi bi-briefcase-fill"></i></div>
+                <h3>Career-Focused Skills</h3>
+                <p>Build job-ready skills through practical projects.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- feature boxes -->
+    <section class="fourth-section">
+        <div class="box-container">
+            <div class="box" data-aos="fade-up"><i class="bi bi-eye"></i><span>Interactive Learning</span></div>
+            <div class="box" data-aos="fade-up"><i class="bi bi-infinity"></i><span>Unlimited Access</span></div>
+            <div class="box" data-aos="fade-up"><i class="bi bi-mortarboard"></i><span>Certified Courses</span></div>
+            <div class="box" data-aos="fade-up"><i class="bi bi-hexagon"></i><span>Skill-Focused</span></div>
+            <div class="box" data-aos="fade-up"><i class="bi bi-arrow-left-right"></i><span>Flexible Schedule</span>
+            </div>
+            <div class="box" data-aos="fade-up"><i class="bi bi-star"></i><span>Expert Instructors</span></div>
+            <div class="box" data-aos="fade-up"><i class="bi bi-grid"></i><span>Structured Curriculum</span></div>
+            <div class="box" data-aos="fade-up"><i class="bi bi-camera-video"></i><span>Video Lessons</span></div>
+            <div class="box" data-aos="fade-up"><i class="bi bi-command"></i><span>Hands-On Projects</span></div>
+            <div class="box" data-aos="fade-up"><i class="bi bi-globe"></i><span>Global Learning</span></div>
+            <div class="box" data-aos="fade-up"><i class="bi bi-activity"></i><span>Progress Tracking</span></div>
+            <div class="box" data-aos="fade-up"><i class="bi bi-brightness-high"></i><span>Career Growth</span></div>
+        </div>
+    </section>
+
+    <!-- courses -->
+    <section class="courses-section">
+        <h2>Featured courses</h2>
+        <p class="subtitle">Discover our most popular courses online.</p>
+        <div class="courses-container">
+            <!-- card 1 -->
+            <div class="course-card" data-aos="fade-up">
+                <div class="course-img"><span class="badge"
+                        style="background:#1E3C5C; color:white;">featured</span><span class="price">$149</span><img
+                        src="https://images.unsplash.com/photo-1587620962725-abab7fe55159?w=600&auto=format" alt=""
+                        style="height:200px; object-fit:cover;"></div>
+                <div class="course-content">
+                    <div class="meta"><span>Beginner</span><span>6 weeks</span></div>
+                    <h3>Digital Marketing Fundamentals</h3>
+                    <p>SEO, branding & analytics.</p>
+                    <div class="instructor"><img src="https://randomuser.me/api/portraits/women/44.jpg" alt="">
+                        <div><strong>Sarah Johnson</strong><small>Marketing</small></div>
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-between"><span>⭐⭐⭐⭐⭐ 4.5</span><span>👥 342</span></div><button
+                        class="enroll-btn">Enroll Now</button>
+                </div>
+            </div>
+            <!-- card 2 -->
+            <div class="course-card" data-aos="fade-up" data-aos-delay="50">
+                <div class="course-img"><span class="badge" style="background:#2D6A4F; color:white;">New</span><span
+                        class="price">$69</span><img
+                        src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600&auto=format" alt=""
+                        style="height:200px; object-fit:cover;"></div>
+                <div class="course-content">
+                    <div class="meta"><span>Intermediate</span><span>8 weeks</span></div>
+                    <h3>Web Dev with JS</h3>
+                    <p>Modern JS, APIs</p>
+                    <div class="instructor"><img src="https://randomuser.me/api/portraits/men/32.jpg" alt="">
+                        <div><strong>Mike Chen</strong><small>Developer</small></div>
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-between"><span>⭐⭐⭐⭐ 4.8</span><span>👥 512</span></div><button
+                        class="enroll-btn">Enroll Now</button>
+                </div>
+            </div>
+            <!-- card 3 -->
+            <div class="course-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="course-img"><span class="badge"
+                        style="background:#f4b400; color:black;">Certificate</span><span class="price">Free</span><img
+                        src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&auto=format" alt=""
+                        style="height:200px; object-fit:cover;"></div>
+                <div class="course-content">
+                    <div class="meta"><span>Beginner</span><span>4 weeks</span></div>
+                    <h3>Data Science Intro</h3>
+                    <p>Visualization, Python</p>
+                    <div class="instructor"><img src="https://randomuser.me/api/portraits/women/68.jpg" alt="">
+                        <div><strong>Helen O.</strong><small>Data Lead</small></div>
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-between"><span>⭐⭐⭐⭐ 4.3</span><span>👥 1.2k</span></div><button
+                        class="enroll-btn">Enroll Now</button>
+                </div>
+            </div>
+            <!-- card 4 -->
+            <div class="course-card" data-aos="fade-up" data-aos-delay="150">
+                <div class="course-img"><span class="badge" style="background:#f16e00; color:white;">popular</span><span
+                        class="price">$199</span><img
+                        src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&auto=format" alt=""
+                        style="height:200px; object-fit:cover;"></div>
+                <div class="course-content">
+                    <div class="meta"><span>Advanced</span><span>12 weeks</span></div>
+                    <h3>Leadership Strategy</h3>
+                    <p>Mgmt & decision making</p>
+                    <div class="instructor"><img src="https://randomuser.me/api/portraits/men/75.jpg" alt="">
+                        <div><strong>Samuel C.</strong><small>MBA</small></div>
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-between"><span>⭐⭐⭐⭐⭐ 4.9</span><span>👥 231</span></div><button
+                        class="enroll-btn">Enroll Now</button>
+                </div>
+            </div>
+            <!-- card 5 -->
+            <div class="course-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="course-img"><span class="badge" style="background:#2D6A4F; color:white;">New</span><span
+                        class="price">$99</span><img
+                        src="https://images.unsplash.com/photo-1542744094-3a31f272c491?w=600&auto=format" alt=""
+                        style="height:200px; object-fit:cover;"></div>
+                <div class="course-content">
+                    <div class="meta"><span>Beginner</span><span>5 weeks</span></div>
+                    <h3>Photo for Beginners</h3>
+                    <p>Composition, editing</p>
+                    <div class="instructor"><img src="https://randomuser.me/api/portraits/women/90.jpg" alt="">
+                        <div><strong>Lisa Ray</strong><small>Photographer</small></div>
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-between"><span>⭐⭐⭐⭐ 4.7</span><span>👥 876</span></div><button
+                        class="enroll-btn">Enroll Now</button>
+                </div>
+            </div>
+            <!-- card 6 -->
+            <div class="course-card" data-aos="fade-up" data-aos-delay="250">
+                <div class="course-img"><span class="badge"
+                        style="background:#1E3C5C; color:white;">featured</span><span class="price">$129</span><img
+                        src="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?w=600&auto=format" alt=""
+                        style="height:200px; object-fit:cover;"></div>
+                <div class="course-content">
+                    <div class="meta"><span>Intermediate</span><span>10 weeks</span></div>
+                    <h3>Graphic Design Master</h3>
+                    <p>Adobe Suite, theory</p>
+                    <div class="instructor"><img src="https://randomuser.me/api/portraits/men/42.jpg" alt="">
+                        <div><strong>Maya T.</strong><small>Design Pro</small></div>
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-between"><span>⭐⭐⭐⭐ 4.6</span><span>👥 621</span></div><button
+                        class="enroll-btn">Enroll Now</button>
+                </div>
+            </div>
+        </div>
+        <button class="Viewmore-courses">view more courses</button>
+    </section>
+
+    <!-- trainers -->
+    <section class="trainers-section">
+        <h2 class="trainers-title">Featured trainers</h2>
+        <p class="trainers-subtitle">Learn from industry experts with real-world experience</p>
+        <div class="trainers-container">
+            <div class="instructor-card"><img src="https://randomuser.me/api/portraits/men/86.jpg" alt="">
+                <h3>Samuel Chinedu</h3><span>Web development</span>
+                <p>Senior full‑stack dev, 8+ years</p>
+                <div class="card-stats">
+                    <div class="stat">
+                        <h4>4.1k</h4><span>Students</span>
+                    </div>
+                    <div class="stat">
+                        <h4>4.9</h4><span>Rating</span>
+                    </div>
+                </div>
+                <div class="instructor-socials"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i
+                            class="fab fa-twitter"></i></a><a href="#"><i class="fab fa-linkedin-in"></i></a></div><a
+                    href="#" class="profile-btn">view profile</a>
+            </div>
+            <div class="instructor-card"><img src="https://randomuser.me/api/portraits/men/45.jpg" alt="">
+                <h3>Micheal Chen</h3><span>Data Science</span>
+                <p>Data analyst, insights specialist</p>
+                <div class="card-stats">
+                    <div class="stat">
+                        <h4>3.5k</h4><span>Students</span>
+                    </div>
+                    <div class="stat">
+                        <h4>4.9</h4><span>Rating</span>
+                    </div>
+                </div>
+                <div class="instructor-socials"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i
+                            class="fab fa-twitter"></i></a><a href="#"><i class="fab fa-linkedin-in"></i></a></div><a
+                    href="#" class="profile-btn">view profile</a>
+            </div>
+            <div class="instructor-card"><img src="https://randomuser.me/api/portraits/women/63.jpg" alt="">
+                <h3>Ogbonna Helen</h3><span>Photography</span>
+                <p>Professional photographer, teacher</p>
+                <div class="card-stats">
+                    <div class="stat">
+                        <h4>4.2k</h4><span>Students</span>
+                    </div>
+                    <div class="stat">
+                        <h4>5.0</h4><span>Rating</span>
+                    </div>
+                </div>
+                <div class="instructor-socials"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i
+                            class="fab fa-twitter"></i></a><a href="#"><i class="fab fa-linkedin-in"></i></a></div><a
+                    href="#" class="profile-btn">view profile</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER with glassmorphism (subscribe button fixed) -->
+    <section class="footer-section">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>Mentor</h3>
+                <p>A108 Adam Street<br>New York, NY 535022</p><b>Phone: +1 5589 55488 55</b><br><b>Email:
+                    info@example.com</b>
+                <div class="footer-socials"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i
+                            class="fab fa-twitter"></i></a><a href="#"><i class="fab fa-linkedin-in"></i></a></div>
+            </div>
+            <div class="footer-col">
+                <h3>Useful links</h3>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About us</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Terms of service</a></li>
+                    <li><a href="#">Privacy policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Our services</h3>
+                <ul>
+                    <li>Web design</li>
+                    <li>Web Development</li>
+                    <li>Product Management</li>
+                    <li>Marketing</li>
+                    <li>Graphic Design</li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Our Newsletter</h3>
+                <p>Subscribe to receive latest news</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Your email" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROGRESS RING SCROLL TO TOP -->
+    <div class="progress-top" id="progress-top">
+        <div class="progress-ring" id="progress-ring">
+            <div class="progress-ring-inner" id="progress-ring-inner">
+                <i class="fas fa-arrow-up"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 800, once: true });
+
+        // preloader hide after load
+        window.addEventListener('load', function () {
+            document.getElementById('preloader').classList.add('hidden');
+        });
+
+        // hamburger
+        const hamburger = document.getElementById('hamburger-btn');
+        const navMenu = document.getElementById('nav-menu');
+        hamburger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            navMenu.classList.toggle('active');
+        });
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => navMenu.classList.remove('active'));
+        });
+
+        // PROGRESS RING + SCROLL TO TOP
+        const progressTop = document.getElementById('progress-top');
+        const progressRing = document.getElementById('progress-ring');
+
+        function setProgress(percent) {
+            const degrees = (percent / 100) * 360;
+            progressRing.style.background = `conic-gradient(var(--primary) ${degrees}deg, #e0e0e0 0deg)`;
+        }
+
+        window.addEventListener('scroll', function () {
+            const winScroll = document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - window.innerHeight;
+            const scrolled = (winScroll / height) * 100;
+            setProgress(scrolled);
+
+            if (winScroll > 200) {
+                progressTop.classList.add('active');
+            } else {
+                progressTop.classList.remove('active');
+            }
+        });
+
+        progressTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        setProgress(0);
+    </script>
+</body>
+
+</html>

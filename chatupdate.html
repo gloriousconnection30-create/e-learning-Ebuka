@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<h2 id="students">0</h2>
+<p>Students</p>
+
+<h2 id="courses">0</h2>
+<p>Courses</p>
+
+<h2 id="events">0</h2>
+<p>Events</p>
+
+<h2 id="trainers">0</h2>
+<p>Trainers</p>
+
+<script>
+
+let students = document.getElementById("students")
+let courses = document.getElementById("courses")
+let events = document.getElementById("events")
+let trainers = document.getElementById("trainers")
+
+
+let s = 0
+let c = 0
+let e = 0
+let t = 0
+
+
+let studentsCounter = setInterval(()=>{
+    s++
+    students.innerHTML = s
+    if(s === 1232) clearInterval(studentsCounter)
+},2)
+
+
+
+
+</script>
+</body>
+</html>

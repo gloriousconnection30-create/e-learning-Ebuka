@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/courses.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div class="custom-navbar">
+      <!-- <i class="fa-solid fa-book"></i> -->
+        <h1>MENTOR</h1>
+        <ul>
+            <li><a href="/index.html">Home</a></li>
+            <li><a href="/about us.html">About</a></li>
+            <li><a href="/courses.html">Courses</a></li>
+            <li><a href="#">Trainers</a></li>
+            <li><a href="#">Trainers Profile</a></li>
+            <li><a href="#">Pricing</a></li>
+            <li><a href="/contact.html">Contact</a></li>
+            <a href="#" class="nav-btn">Get Started</a>
+        </ul>
+    </div>
+
+    <!-- <div class="first-container">
+    <div class="first1">
+        <h4>Courses</h4>
+    </div>
+
+    <div class="first2">
+        <h4>Home / courses</h4>
+    </div>
+</div> -->
+
+<div class="page-header">
+    <h2>Courses</h2>
+    <p><i class="fa-solid fa-house"></i> Home / Courses</p>
+</div>
+
+<section class="courses-section">
+    <div class="courses-container">
+
+
+        <aside class="filter-box">
+            <h3>Filter Courses</h3>
+
+            <hr>
+            <div class="filter-group">
+                <h4>Category</h4>
+                <label><input type="checkbox"> Programming</label>
+                <label><input type="checkbox"> Design</label>
+                <label><input type="checkbox"> Business</label>
+                <label><input type="checkbox"> Marketing</label>
+            </div>
+
+            <div class="filter-group">
+                <h4>Level</h4>
+                <label><input type="checkbox"> All levels</label>
+                <label><input type="checkbox"> Beginners</label>
+                <label><input type="checkbox"> Intermediate</label>
+                <label><input type="checkbox"> Advanced</label>
+            </div>
+
+            <div class="filter-group">
+                <h4>Duration</h4>
+                <label><input type="checkbox"> Under 5hours</label>
+                <label><input type="checkbox"> 5-20mins</label>
+                <label><input type="checkbox"> 20+hours</label>
+            </div>
+
+            <div class="filter-group">
+                <h4>Price</h4>
+                <label><input type="checkbox"> Free</label>
+                <label><input type="checkbox"> Paid</label>
+            </div>
+        </aside>
+
+        <div class="courses-content">
+
+            <div class="courses-top">
+                <div class="search-wrapper">
+                    <input type="text" placeholder="Search courses... " class="search-input">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+
+                <select class="sort-select">
+                    <option>Sort by: Most popular</option>
+                    <option>Newest</option>
+                    <option>Highest rated</option>
+                </select>
+            </div>
+
+            <div class="courses-grid">
+                
+                <div class="course-card">
+                    <div class="course-image">
+                        <span class="badge featured">Programming</span>
+                        <span class="badge level-badge">Intermediate</span>
+                        <span class="price-tag">$89</span>
+                        <img src="image/360_F_1527906903_06a5EoR1KBascG0PkTkmOODTYRaBMLB3.jpg" alt="">
+                    </div>
+
+                    <div class="course-body">
+                        <h3 class="course-title">Advanced JavaScript</h3>
+                        <p class="course-p">Learn modern JavaScript — ES6+, async patterns, tooling, and best practices to build production-ready apps.</p>
+
+                        <div class="meta-row">
+                            <div class="meta-item"><span class="icon">⏱</span> 15 hours</div>
+                            <div class="meta-item"><span class="icon">👥</span> 1,245 students</div>
+                        </div>
+
+                        <div class="rating-row">
+                            <div class="stars">★★★★★ <span class="rating-num">4.8</span></div>
+                            <div class="reviews">(89 reviews)</div>
+                        </div>
+
+                        <hr>
+
+                        <div class="instructor">
+                            <img class="instructor-image" src="image/360_F_1527906903_06a5EoR1KBascG0PkTkmOODTYRaBMLB3.jpg" alt="">
+                            <div class="instructor-info">
+                                <strong>Dr. Marcus Thompson</strong>
+                            </div>
+                        </div>
+
+                        <button class="enroll-btn">Enroll Now</button>
+                    </div>
+                </div>
+
+                <div class="course-card">
+                    <div class="course-image">
+                        <span class="badge design">Design</span>
+                        <span class="badge level-badge gray">Beginner</span>
+                        <span class="price-tag free">Free</span>
+                        <img src="image/360_F_1527906903_06a5EoR1KBascG0PkTkmOODTYRaBMLB3.jpg" alt="">
+                    </div>
+
+                    <div class="course-body">
+                        <h3 class="course-title">UI / UX Design Fundamentals</h3>
+                        <p class="course-p">Basics of user-centered design, prototyping, and visual hierarchy to create beautiful interfaces.</p>
+
+                        <div class="meta-row">
+                            <div class="meta-item"><span class="icon">⏱</span> 8 hours</div>
+                            <div class="meta-item"><span class="icon">👥</span> 2,891 students</div>
+                        </div>
+
+                        <div class="rating-row">
+                            <div class="stars">★★★★☆ <span class="rating-num">4.6</span></div>
+                            <div class="reviews">(156 reviews)</div>
+                        </div>
+
+                        <hr>
+
+                        <div class="instructor">
+                            <img class="instructor-image" src="image/360_F_1527906903_06a5EoR1KBascG0PkTkmOODTYRaBMLB3.jpg" alt="">
+                            <div class="instructor-info">
+                                <strong>Sarah Johnson</strong>
+                            </div>
+                        </div>
+
+                        <button class="enroll-btn">Enroll Now</button>
+                    </div>
+                </div>
+                
+                <div class="course-card">
+                    <div class="course-image">
+                        <span class="badge">Business</span>
+                        <span class="badge level-badge gray">Beginner</span>
+                        <span class="price-tag">$149</span>
+                        <img src="image/360_F_1527906903_06a5EoR1KBascG0PkTkmOODTYRaBMLB3.jpg" alt="">
+                    </div>
+
+                    <div class="course-body">
+                        <h3 class="course-title">Digital Marketing Strategies</h3>
+                        <p class="course-p">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas vestibulum tortor.</p>
+
+                        <div class="meta-row">
+                            <div class="meta-item"><span class="icon">⏱</span> 22 hours</div>
+                            <div class="meta-item"><span class="icon">👥</span> 678 students</div>
+                        </div>
+
+                        <div class="rating-row">
+                            <div class="stars">★★★★☆ <span class="rating-num">5.0</span></div>
+                            <div class="reviews">(43 reviews)</div>
+                        </div>
+
+                        <hr>
+
+                        <div class="instructor">
+                            <img class="instructor-image" src="image/360_F_1527906903_06a5EoR1KBascG0PkTkmOODTYRaBMLB3.jpg" alt="">
+                            <div class="instructor-info">
+                                <strong>David rodriguez</strong>
+                            </div>
+                        </div>
+
+                        <button class="enroll-btn">Enroll Now</button>
+                    </div>
+                </div>
+                
+                <div class="course-card">
+                    <div class="course-image">
+                        <span class="badge">programming</span>
+                        <span class="badge level-badge gray">Advanced</span>
+                        <span class="price-tag">$199</span>
+                        <img src="image/360_F_1527906903_06a5EoR1KBascG0PkTkmOODTYRaBMLB3.jpg" alt="">
+                    </div>
+
+                    <div class="course-body">
+                        <h3 class="course-title">Machine Learning with Python</h3>
+                        <p class="course-p">Donec rutrum congue leo eget malesuada. Cras ultricies ligula sed magna dictum porta nulla facilisi morbi tempus.</p>
+
+                        <div class="meta-row">
+                            <div class="meta-item"><span class="icon">⏱</span> 35 hours</div>
+                            <div class="meta-item"><span class="icon">👥</span> 534 students</div>
+                        </div>
+
+                        <div class="rating-row">
+                            <div class="stars">★★★★☆ <span class="rating-num">4.7</span></div>
+                            <div class="reviews">(73 reviews)</div>
+                        </div>
+
+                        <hr>
+
+                        <div class="instructor">
+                            <img class="instructor-image" src="image/360_F_1527906903_06a5EoR1KBascG0PkTkmOODTYRaBMLB3.jpg" alt="">
+                            <div class="instructor-info">
+                                <strong>Mr samuel chinedu</strong>
+                            </div>
+                        </div>
+
+                        <button class="enroll-btn">Enroll Now</button>
+                    </div>
+                </div>
+
+                <div class="course-card">
+                    <div class="course-image">
+                        <span class="badge">Marketing</span>
+                        <span class="badge level-badge">Intermediate</span>
+                        <span class="price-tag">$59</span>
+                        <img src="image/360_F_1527906903_06a5EoR1KBascG0PkTkmOODTYRaBMLB3.jpg" alt="">
+                    </div>
+
+                    <div class="course-body">
+                        <h3 class="course-title">Social Media Marketing</h3>
+                        <p class="course-p">Sed porttitor lectus nibh vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.</p>
+
+                        <div class="meta-row">
+                            <div class="meta-item"><span class="icon">⏱</span> 12 hours</div>
+                            <div class="meta-item"><span class="icon">👥</span> 3457 students</div>
+                        </div>
+
+                        <div class="rating-row">
+                            <div class="stars">★★★★☆ <span class="rating-num">4.7</span></div>
+                            <div class="reviews">(73 reviews)</div>
+                        </div>
+
+                        <hr>
+
+                        <div class="instructor">
+                            <img class="instructor-image" src="image/360_F_1527906903_06a5EoR1KBascG0PkTkmOODTYRaBMLB3.jpg" alt="">
+                            <div class="instructor-info">
+                                <strong> Michael Davis</strong>
+                            </div>
+                        </div>
+
+                        <button class="enroll-btn">Enroll Now</button>
+                    </div>
+                </div>
+
+                <div class="course-card">
+                    <div class="course-image">
+                        <span class="badge design">Design</span>
+                        <span class="badge level-badge">Intermediate</span>
+                        <span class="price-tag">$99</span>
+                        <img src="image/360_F_1527906903_06a5EoR1KBascG0PkTkmOODTYRaBMLB3.jpg" alt="">
+                    </div>
+
+                    <div class="course-body">
+                        <h3 class="course-title">Graphic Design Mastery</h3>
+                        <p class="course-p">Curabitur aliquet quam id dui posuere blandit mauris blandit aliquet elit eget tincidunt nibh pulvinar.</p>
+
+                        <div class="meta-row">
+                            <div class="meta-item"><span class="icon">⏱</span> 18 hours</div>
+                            <div class="meta-item"><span class="icon">👥</span> 1892 students</div>
+                        </div>
+
+                        <div class="rating-row">
+                            <div class="stars">★★★★☆ <span class="rating-num">4.7</span></div>
+                            <div class="reviews">(73 reviews)</div>
+                        </div>
+
+                        <hr>
+
+                        <div class="instructor">
+                            <img class="instructor-image" src="image/360_F_1527906903_06a5EoR1KBascG0PkTkmOODTYRaBMLB3.jpg" alt="">
+                            <div class="instructor-info">
+                                <strong> Lisa Martinez</strong>
+                            </div>
+                        </div>
+
+                        <button class="enroll-btn">Enroll Now</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<script>
+  AOS.init({
+    duration: 1000,
+    once: true
+  });
+
+        let totop = document.getElementById('to-top')
+
+        window.addEventListener("scroll", function(){
+            if(window.pageYOffset > 100){
+                totop.classList.add('active')
+            }else{
+                totop.classList.remove('active')
+            }
+        })
+        totop.addEventListener('click', function(){
+            window.scrollTo(0,0)
+        })
+
+</script>
+</body>

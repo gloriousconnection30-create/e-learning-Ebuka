@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>live search</h2>
+    <input type="text" id="search" placeholder="search names...">
+    <ul id="list">
+        <li>Samuel</li>
+        <li>Nonye</li>
+        <li>Paul</li>
+        <li>Clark</li>
+        <li>David</li>
+        <li>Emmanuel</li>
+    </ul>
+    <h2>Auto count</h2>
+    <h1 id="autocount">0</h1>
+    <script>
+        const search = document.getElementById("search")
+        const items  = document.querySelectorAll("#list li")
+        search.addEventListener("input", () =>{
+            const value = search.value.toLowerCase();
+            items.forEach(item=>{
+                item.style.display= item.innerHTML.toLowerCase().includes(value) ? "block":"none";
+            })
+        })
+
+        const num = document.getElementById("autocount")
+        let value = 0, end = 1000
+        let counter= setInterval(()=>{
+            value++
+            num.innerHTML= value;
+            if(value===end)clearInterval(counter);
+        },30)
+    </script>
+</body>
+</html>
